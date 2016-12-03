@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PCWA ARHO DATA INTERFACE</title>
+</head>
+<body>
+<h1>PCWA ARHO SNOW DATA INTERFACE</h1>
+<h2>Instructions of using this interface</h2>
+<p>Before click the "Download" button, you have to make sure
+all fields in the form below are filled already. <br>
+    Otherwise it may cause damaging consequences.
+</p>
+<ul style="list-style-type:disc">
+    <li>
+        The first field "Site Name"
+        is a drop down list where you choose the site. <br>
+        <ul style="list-style-type:square">
+            <li>e.g: Duncan Peak</li>
+        </ul>
+    </li>
+    <li>
+        The second field "Begin Time" has an embedded calendar
+        from which you could select the beginning date. <br>
+        <ul style="list-style-type:circle">
+            <li>Note: The beginning date cannot be earlier than 2015-10-01</li>
+            <li>If you find no drop down list with time showing there,
+                you need you change a browser that support HTML5</li>
+        </ul>
+    </li>
+    <li>
+        The thrid field "End Time", same as "Begin Time" but has to be equal or later
+        than "Begin Time"
+    </li>
+</ul>
+
+<h2>Please fill in the following form to download the snow depth data</h2>
+<form action="/download" method="Post">
+    <ul style="list-style-type:disc">
+        <li>
+            Site Name:
+            <select name="site">
+                <option value="Alpha">Alpha</option>
+                <option value="Bear_Trap">Bear Trap</option>
+                <option value="Caples_Lk">Caples Lake</option>
+                <option value="DollyRice">Dolly Creek</option>
+                <option value="Duncan_Pk">Duncan Peak</option>
+                <option value="Echo_Pk">Echo Peak</option>
+                <option value="Mt_Lincoln">Mount Lincoln</option>
+                <option value="Onion_Ck">Onion Creek</option>
+                <option value="Owens_Camp">Owens Camp</option>
+                <option value="Robbs_Saddle">Robbs Saddle</option>
+                <option value="Schneiders">Schneiders</option>
+                <option value="Talbot_Camp">Talbot Camp</option>
+                <option value="Van_Vleck">Vanvleck</option>
+            </select>
+        </li>
+        <li>
+            Begin Time
+            <input type="date" name="start_date">
+        </li>
+        <li>
+            End Time
+            <input type="date" name="end_date">
+        </li>
+    </ul>
+    <input type="submit" value="Download">
+</form>
+</body>
+</html>
