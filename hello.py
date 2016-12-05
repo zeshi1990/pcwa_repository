@@ -21,7 +21,7 @@ def download():
     start_date = str(request.form['start_date'])
     end_date = str(request.form['end_date'])
     query(site, start_date, end_date)
-    return send_file("tmp/tmp.csv"), site + " data downloaded"
+    return send_file("tmp/tmp.csv")
 
 
 def query(site, start_date, end_date):
