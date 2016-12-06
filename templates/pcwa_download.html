@@ -55,58 +55,70 @@ all fields in the form below are filled already. <br>
     </style>
 
 <div id="map"></div>
+<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
     <script>
-      var map;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 39.080193, lng: -120.281183},
-          zoom: 9
-        });
-        var site_names = [ "Alpha",
-                            "Bear Trap",
-                            "Caples Lake",
-                            "Dolly Creek",
-                            "Duncan Peak",
-                            "Echo Peak",
-                            "Mt. Lincoln",
-                            "Onion Creek",
-                            "Owens Camp",
-                            "Robbs_Saddle",
-                            "Schneiders",
-                            "Talbot_Camp",
-                            "Van_Vleck"];
-
-        var site_locations = [{lat: 38.805000, lng:-120.214996},
-                              {lat: 39.097492, lng:-120.575371},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 39.149879, lng:-120.369392},
-                              {lat: 39.155510, lng:-120.511940},
-                              {lat: 38.849152, lng:-120.079865},
-                              {lat: 39.286541, lng:-120.322472},
-                              {lat: 39.274529, lng:-120.357094},
-                              {lat: 38.735626, lng:-120.241226},
-                              {lat: 38.911987, lng:-120.379433},
-                              {lat: 38.745998, lng:-120.065002},
-                              {lat: 39.189899, lng:-120.377213},
-                              {lat: 38.942863, lng:-120.310905}];
-
-        for (var i=0; i<14; i++) {
-            var marker = new google.maps.Marker({
-                position: site_locations[i],
-                map: map
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 39.080193, lng: -120.281183},
+                zoom: 9
             });
 
-            var infowindow = new google.maps.InfoWindow();
+            var site_names = [{name: "Alpha", val: "Alpha"},
+                {name: "Bear Trap", val: "Bear_Trap"},
+                {name: "Caples Lake", val: "Caples_Lk"},
+                {name: "Dolly Creek", val: "DollyRice"},
+                {name: "Duncan Peak", val: "Duncan_Pk"},
+                {name: "Echo Peak", val: "Echo_Pk"},
+                {name: "Mt. Lincoln", val: "Mt_Lincoln"},
+                {name: "Onion Creek", val: "Onion_Ck"},
+                {name: "Owens Camp", val: "Onion_Ck"},
+                {name: "Robbs Saddle", val: "Robbs_Saddle"},
+                {name: "Schneiders", val: "Schneiders"},
+                {name: "Talbot Camp", val: "Talbot_Camp"},
+                {name: "Vanvleck", val: "Van_Vleck"}];
 
-            var content = site_names[i];
+            var site_locations = [{lat: 38.805000, lng:-120.214996},
+                {lat: 39.097492, lng:-120.575371},
+                {lat: 38.711502, lng:-120.042786},
+                {lat: 39.149879, lng:-120.369392},
+                {lat: 39.155510, lng:-120.511940},
+                {lat: 38.849152, lng:-120.079865},
+                {lat: 39.286541, lng:-120.322472},
+                {lat: 39.274529, lng:-120.357094},
+                {lat: 38.735626, lng:-120.241226},
+                {lat: 38.911987, lng:-120.379433},
+                {lat: 38.745998, lng:-120.065002},
+                {lat: 39.189899, lng:-120.377213},
+                {lat: 38.942863, lng:-120.310905}];
 
-           google.maps.event.addListener(marker, 'click', (function(marker,content,infowindow){
-                return function() {
-                    infowindow.setContent(content);
-                    infowindow.open(map,marker);
-                };
-            })(marker,content,infowindow));
-        }
+            var prev_infowindow = false;
+
+            for (var i=0; i<14; i++) {
+                var marker = new google.maps.Marker({
+                    position: site_locations[i],
+                    map: map
+                });
+
+                var infowindow = new google.maps.InfoWindow();
+
+                var content = site_names[i].name;
+                var content_val = site_names[i].val;
+
+                google.maps.event.addListener(marker, 'click', (function(marker,content,infowindow,content_val){
+                    return function() {
+                        if (prev_infowindow) {
+                            prev_infowindow.close();
+                        }
+
+                        prev_infowindow = infowindow;
+                        infowindow.setContent(content);
+                        infowindow.open(map,marker);
+                        var element = document.getElementById('site');
+                        element.value = content_val;
+                    };
+                })(marker,content,infowindow,content_val));
+            }
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCOBJPFZ8tkAYz8L94lpL1kbg4an4ngU7M&callback=initMap"
@@ -118,7 +130,7 @@ all fields in the form below are filled already. <br>
     <ul style="list-style-type:disc">
         <li>
             Site Name:
-            <select name="site">
+            <select id="site" name="site">
                 <option value="Alpha">Alpha</option>
                 <option value="Bear_Trap">Bear Trap</option>
                 <option value="Caples_Lk">Caples Lake</option>
