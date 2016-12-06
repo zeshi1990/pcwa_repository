@@ -23,7 +23,7 @@ all fields in the form below are filled already. <br>
         <ul style="list-style-type:circle">
             <li>Note: The beginning date cannot be earlier than 2015-10-01</li>
             <li>If you find no drop down list with time showing there,
-                you need you change a browser that support HTML5</li>
+                you need to switch your browser to one that supports HTML5</li>
         </ul>
     </li>
     <li>
@@ -32,7 +32,72 @@ all fields in the form below are filled already. <br>
     </li>
 </ul>
 
+<title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 60%;
+        width: 70%;
+        margin: 0;
+        padding: 0;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 80%;
+        width: 80%;
+        margin: 0 15% 0 15%;
+        padding: 0;
+      }
+    </style>
+
+<div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 39.080193, lng: -120.281183},
+          zoom: 9
+        });
+        var sites_names = [ "Alpha",
+                            "Bear Trap",
+                            "Caples Lake",
+                            "Dolly Creek",
+                            "Duncan Peak",
+                            "Echo Peak",
+                            "Mt. Lincoln",
+                            "Onion Creek",
+                            "Owens Camp",
+                            "Robbs_Saddle",
+                            "Schneiders",
+                            "Talbot_Camp",
+                            "Van_Vleck"]
+        var site_locations = [{lat: 38.805000, lng:-120.214996},
+                              {lat: 39.097492, lng:-120.575371},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786},
+                              {lat: 38.711502, lng:-120.042786}]
+        for (var i=0; i<14; i++) {
+            var marker = new google.maps.Marker
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key= AIzaSyCOBJPFZ8tkAYz8L94lpL1kbg4an4ngU7M&callback=initMap"
+    async defer></script>
+
 <h2>Please fill in the following form to download the snow depth data</h2>
+
 <form action="/download" method="Post">
     <ul style="list-style-type:disc">
         <li>
