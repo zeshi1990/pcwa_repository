@@ -35,7 +35,7 @@ def query(site, start_date, end_date, cnx):
     ts_columns = ["datetime"]
 
     for node_id in range(1, num_of_nodes+1):
-        query_txt_node_ts = ("SELECT level_1.datetime, motes.ground_dist - level_1.snowdepth FROM level_1 JOIN " +
+        query_txt_node_ts = ("SELECT level_1.datetime, motes.ground_dist - level_1.sd_clean FROM level_1 JOIN " +
             "motes ON level_1.site_id = motes.site_id AND level_1.node_id = motes.node_id WHERE " +
             "level_1.site_id = " + str(site_id) + " AND level_1.node_id = " + str(node_id) +
             " AND level_1.datetime > '" + start_date + "' AND level_1.datetime < '" + end_date +
