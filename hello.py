@@ -8,6 +8,7 @@ cursor = cnx.cursor()
 
 @app.route("/")
 def index():
+    cnx.reconnect(attempts=5, delay=0)
     return render_template("pcwa_download.html")
     # if request.method == 'GET':
     #     site_name = request.form['site']
