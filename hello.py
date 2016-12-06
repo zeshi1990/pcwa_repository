@@ -3,12 +3,9 @@ import mysql.connector
 import pandas as pd
 
 app = Flask(__name__)
-cnx = mysql.connector.connect(user="root", password="root", database="ar_data")
-cursor = cnx.cursor()
 
 @app.route("/")
 def index():
-    cnx.reconnect(attempts=5, delay=0)
     return render_template("pcwa_download.html")
     # if request.method == 'GET':
     #     site_name = request.form['site']
@@ -21,11 +18,13 @@ def download():
     site = request.form['site']
     start_date = str(request.form['start_date'])
     end_date = str(request.form['end_date'])
-    query(site, start_date, end_date)
+    cnx = mysql.connector.connect(user="root", password="root", database="ar_data")
+    query(site, start_date, end_date, cnx)
+    cnx.close()
     return send_file("tmp/tmp.csv", attachment_filename=site+"_"+start_date+"_"+end_date+".csv", as_attachment=True)
 
 
-def query(site, start_date, end_date):
+def query(site, start_date, end_date, cnx):
     query_txt_site = "SELECT site_id, num_of_nodes FROM sites WHERE site_name = '" + site + "';"
     site_df = pd.read_sql_query(query_txt_site, cnx)
 
