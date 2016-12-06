@@ -61,7 +61,7 @@ all fields in the form below are filled already. <br>
           center: {lat: 39.080193, lng: -120.281183},
           zoom: 9
         });
-        var sites_names = [ "Alpha",
+        var site_names = [ "Alpha",
                             "Bear Trap",
                             "Caples Lake",
                             "Dolly Creek",
@@ -73,23 +73,38 @@ all fields in the form below are filled already. <br>
                             "Robbs_Saddle",
                             "Schneiders",
                             "Talbot_Camp",
-                            "Van_Vleck"]
+                            "Van_Vleck"];
+
         var site_locations = [{lat: 38.805000, lng:-120.214996},
                               {lat: 39.097492, lng:-120.575371},
                               {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786},
-                              {lat: 38.711502, lng:-120.042786}]
+                              {lat: 39.149879, lng:-120.369392},
+                              {lat: 39.155510, lng:-120.511940},
+                              {lat: 38.849152, lng:-120.079865},
+                              {lat: 39.286541, lng:-120.322472},
+                              {lat: 39.274529, lng:-120.357094},
+                              {lat: 38.735626, lng:-120.241226},
+                              {lat: 38.911987, lng:-120.379433},
+                              {lat: 38.745998, lng:-120.065002},
+                              {lat: 39.189899, lng:-120.377213},
+                              {lat: 38.942863, lng:-120.310905}];
+
         for (var i=0; i<14; i++) {
-            var marker = new google.maps.Marker
+            var marker = new google.maps.Marker({
+                position: site_locations[i],
+                map: map
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var content = site_names[i];
+
+           google.maps.event.addListener(marker, 'click', (function(marker,content,infowindow){
+                return function() {
+                    infowindow.setContent(content);
+                    infowindow.open(map,marker);
+                };
+            })(marker,content,infowindow));
         }
       }
     </script>
